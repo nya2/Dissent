@@ -10,6 +10,9 @@ namespace Applications {
     GroupSize(40),
     LocalNodeCount(1),
     SessionType("null"),
+    WebServer(false),
+    WebServerPort(8080),
+    WebServerHost(QHostAddress::Any),
     _use_file(true),
     _settings(file, QSettings::IniFormat),
     _reason()
@@ -30,6 +33,20 @@ namespace Applications {
       LocalNodeCount = _settings.value("local_nodes").toInt();
     }
 
+    if(_settings.contains("web_server_port")) {
+      WebServerPort = _settings.value("web_server_port").toInt();
+    }
+
+    if(_settings.contains("web_server_host")) {
+      QString hoststr = _settings.value("web_server_host").toString();
+
+      if(hoststr == "*") {
+        WebServerHost = QHostAddress::Any;
+      } else {
+        WebServerHost.setAddress(hoststr);
+      }
+    }
+
     if(_settings.contains("session_type")) {
       SessionType = _settings.value("session_type").toString();
     }
@@ -48,7 +65,7 @@ namespace Applications {
       }
     }
 
-    Console = _settings.value("console").toBool();
+    WebServer = _settings.value("web_server").toBool();
     Multithreading = _settings.value("multithreading").toBool();
     LocalId = _settings.value("local_id").toString();
   }
@@ -62,6 +79,16 @@ namespace Applications {
 
     if(LocalEndPoints.count() == 0) {
       _reason = "No locally defined end points";
+      return false;
+    }
+
+    if((WebServerPort <= 0) || (WebServerPort > ((1 << 16) - 1))) {
+      _reason = "Invalid port number"; 
+      return false;
+    }
+
+    if(WebServerHost.isNull()) {
+      _reason = "Invalid web host address";
       return false;
     }
 
@@ -132,6 +159,8 @@ namespace Applications {
 
     _settings.setValue("group_size", GroupSize);
     _settings.setValue("local_nodes", LocalNodeCount);
+    _settings.setValue("web_server_port", WebServerPort);
+    _settings.setValue("web_server", WebServer);
     _settings.setValue("demo_mode", DemoMode);
     _settings.setValue("log", Log);
     _settings.setValue("multithreading", Multithreading);

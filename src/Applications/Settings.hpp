@@ -3,6 +3,7 @@
 
 #include <QtCore>
 #include <QDebug>
+#include <QHostAddress>
 #include <QSettings>
 
 namespace Dissent {
@@ -73,9 +74,19 @@ namespace Applications {
       QString Log;
 
       /**
-       * Console interaction -- read on stdin -- disable for non-interactive apps
+       * Run an HTTP server?
        */
-      bool Console;
+      bool WebServer;
+
+      /**
+       * Port on which the HTTP server should listen
+       */
+      int WebServerPort;
+
+      /**
+       * Hostname on which the HTTP server should listen
+       */ 
+      QHostAddress WebServerHost;
 
       /**
        * Enable multhreaded operations
