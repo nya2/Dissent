@@ -14,85 +14,85 @@ namespace Crypto {
       /**
        * Load a public key from a file
        */
-      virtual AsymmetricKey *LoadPublicKeyFromFile(const QString &filename) = 0;
+      virtual AsymmetricKey *LoadPublicKeyFromFile(const QString &filename);
 
       /**
        * Loading a public key from a byte array
        */
-      virtual AsymmetricKey *LoadPublicKeyFromByteArray(const QByteArray &data) = 0;
+      virtual AsymmetricKey *LoadPublicKeyFromByteArray(const QByteArray &data);
 
       /**
        * Generate a public key using the given data as a seed to a RNG
        */
-      virtual AsymmetricKey *GeneratePublicKey(const QByteArray &seed) = 0;
+      virtual AsymmetricKey *GeneratePublicKey(const QByteArray &seed) ;
 
       /**
        * Load a private key from a file
        */
-      virtual AsymmetricKey *LoadPrivateKeyFromFile(const QString &filename) = 0;
+      virtual AsymmetricKey *LoadPrivateKeyFromFile(const QString &filename);
 
       /**
        * Loading a private key from a byte array
        */
-      virtual AsymmetricKey *LoadPrivateKeyFromByteArray(const QByteArray &data) = 0;
+      virtual AsymmetricKey *LoadPrivateKeyFromByteArray(const QByteArray &data);
 
       /**
        * Generate a private key using the given data as a seed to a RNG
        */
-      virtual AsymmetricKey *GeneratePrivateKey(const QByteArray &seed) = 0;
+      virtual AsymmetricKey *GeneratePrivateKey(const QByteArray &seed);
 
       /**
        * Generates a unique (new) private key
        */
-      virtual AsymmetricKey *CreatePrivateKey() = 0;
+      virtual AsymmetricKey *CreatePrivateKey() ;
 
       /**
        * Returns a random number generator
        */
       virtual Dissent::Utils::Random *GetRandomNumberGenerator(
-          const QByteArray &seed = QByteArray(), uint index = 0) = 0;
+          const QByteArray &seed = QByteArray(), uint index = 0) ;
 
       /**
        * Returns the optimal seed size for the RNG
        */
-      virtual uint RngOptimalSeedSize() = 0;
+      virtual uint RngOptimalSeedSize() ;
 
       /**
        * Returns a hash algorithm
        */
-      virtual Hash *GetHashAlgorithm() = 0;
+      virtual Hash *GetHashAlgorithm() ;
 
       /**
        * Returns an integer data
        */
-      virtual IntegerData *GetIntegerData(int value) = 0;
+      virtual IntegerData *GetIntegerData(int value);
 
       /**
        * Returns an integer data
        */
-      virtual IntegerData *GetIntegerData(const QByteArray &value) = 0;
+      virtual IntegerData *GetIntegerData(const QByteArray &value);
 
       /**
        * Returns an integer data
        */
-      virtual IntegerData *GetIntegerData(const QString &value) = 0;
+      virtual IntegerData *GetIntegerData(const QString &value) ;
 
       /**
        * Returns a DiffieHellman operator
        */
-      virtual DiffieHellman *CreateDiffieHellman() = 0;
+      virtual DiffieHellman *CreateDiffieHellman();
 
       /**
        * Generate a DiffieHellman operator using the given data as a seed to a RNG
        * @param seed seed used to generate the DiffieHellman exchange
        */
-      virtual DiffieHellman *GenerateDiffieHellman(const QByteArray &seed) = 0;
+      virtual DiffieHellman *GenerateDiffieHellman(const QByteArray &seed) ;
 
       /**
        * Loads a DiffieHellman key from a byte array
        * @param private_component the private component in the DH exchange
        */
-      virtual DiffieHellman *LoadDiffieHellman(const QByteArray &private_component) = 0;
+      virtual DiffieHellman *LoadDiffieHellman(const QByteArray &private_component) ;
 
       /**
        * Destructor

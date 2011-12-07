@@ -2,6 +2,7 @@
 
 #include "CppLibrary.hpp"
 #include "NullLibrary.hpp"
+#include "BotanLibrary.hpp"
 #include "CryptoFactory.hpp"
 #include "ThreadedOnionEncryptor.hpp"
 
@@ -45,6 +46,9 @@ namespace Crypto {
       case Null:
         _library.reset(new NullLibrary());
         break;
+      case Botan:
+	_library.reset(new BotanLibrary());
+	break;
       default:
         qCritical() << "Invalid Library type:" << type;
         _library.reset(new CppLibrary());

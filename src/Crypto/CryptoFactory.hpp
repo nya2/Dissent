@@ -16,6 +16,7 @@ namespace Crypto {
 
       enum LibraryName {
         CryptoPP,
+	Botan,
         Null
       };
 
